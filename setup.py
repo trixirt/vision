@@ -224,7 +224,8 @@ def get_extensions():
             extra_compile_args["nvcc"].append("-g")
     else:
         print("Compiling with debug mode OFF")
-        extra_compile_args["cxx"].append("-g0")
+        # extra_compile_args["cxx"].append("-g0")
+        extra_compile_args["cxx"].append("-g")
 
     sources = [os.path.join(extensions_dir, s) for s in sources]
 
@@ -380,8 +381,8 @@ def get_extensions():
 
         ffmpeg_bin = os.path.dirname(ffmpeg_exe)
         ffmpeg_root = os.path.dirname(ffmpeg_bin)
-        ffmpeg_include_dir = os.path.join(ffmpeg_root, "include")
-        ffmpeg_library_dir = os.path.join(ffmpeg_root, "lib")
+        ffmpeg_include_dir = os.path.join(ffmpeg_root, "include/ffmpeg")
+        ffmpeg_library_dir = os.path.join(ffmpeg_root, "lib64")
 
         gcc = os.environ.get("CC", shutil.which("gcc"))
         platform_tag = subprocess.run([gcc, "-print-multiarch"], stdout=subprocess.PIPE)
