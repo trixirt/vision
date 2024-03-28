@@ -7,9 +7,6 @@
 #endif
 #include <torch/library.h>
 
-#ifdef WITH_CUDA
-#include <cuda.h>
-#endif
 #ifdef WITH_HIP
 #include <hip/hip_runtime.h>
 #endif
@@ -28,8 +25,8 @@ PyMODINIT_FUNC PyInit__C(void) {
 
 namespace vision {
 int64_t cuda_version() {
-#ifdef WITH_CUDA
-  return CUDA_VERSION;
+#if defined(WITH_HIP)
+  return TORCH_HIP_VERSION;
 #else
   return -1;
 #endif
